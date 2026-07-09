@@ -1,0 +1,23 @@
+[07-08 10:57:19] ==== ACT 10K IN-DIST (CPU osmesa, canonical) START  [free RAM 220G] ====
+[07-08 10:57:19] START Long (in-dist, max_steps=700, 10 tasks x 3 seeds x 10 ep)
+[07-08 10:57:19] START Object (in-dist, max_steps=520, 10 tasks x 3 seeds x 10 ep)
+[07-08 10:57:19] START Spatial (in-dist, max_steps=520, 10 tasks x 3 seeds x 10 ep)
+[07-08 10:57:19] START Goal (in-dist, max_steps=520, 10 tasks x 3 seeds x 10 ep)
+[07-08 11:26:13] ==== ACT 10K IN-DIST SHARDED (8 procs = 4 suites x 2 halves) START  [RAM 211G] ====
+[07-08 11:26:13] START Long shard-A (tasks 0..4, max_steps=700)
+[07-08 11:26:13] START Object shard-B (tasks 5..9, max_steps=520)
+[07-08 11:26:13] START Spatial shard-B (tasks 5..9, max_steps=520)
+[07-08 11:26:13] START Long shard-B (tasks 5..9, max_steps=700)
+[07-08 11:26:13] START Spatial shard-A (tasks 0..4, max_steps=520)
+[07-08 11:26:13] START Object shard-A (tasks 0..4, max_steps=520)
+[07-08 11:26:13] START Goal shard-B (tasks 5..9, max_steps=520)
+[07-08 11:26:13] START Goal shard-A (tasks 0..4, max_steps=520)
+[07-08 12:44:31] DONE  Object shard-B  (78min)
+[07-08 12:46:45] DONE  Goal shard-B  (80min)
+[07-08 12:51:40] DONE  Goal shard-A  (85min)
+[07-08 12:59:11] DONE  Spatial shard-A  (92min)
+[07-08 13:16:05] DONE  Object shard-A  (109min)
+[07-08 13:37:38] DONE  Spatial shard-B  (131min)
+[07-08 13:53:34] DONE  Long shard-B  (147min)
+[07-08 13:56:19] DONE  Long shard-A  (150min)
+[07-08 13:56:19] ==== ALL ACT 10K IN-DIST SHARDS DONE ====

@@ -1,0 +1,87 @@
+{
+  "_config": {
+    "libero_object": {
+      "replan": 5,
+      "indist_episodes": 10,
+      "test_seeds": 3,
+      "max_steps": 500,
+      "models": {
+        "act": "/home/user/Desktop/Ayush PH test/ACT/act_results/Object/runs/act/checkpoints/30000"
+      }
+    }
+  },
+  "LIBERO-OBJECT": {
+    "act": {
+      "per_task": {
+        "5": {
+          "task": "pick up the tomato sauce and place it in the basket",
+          "success_rate": 0.6333333333333334,
+          "std": 0.16996731711975951,
+          "per_seed": [
+            0.8,
+            0.4,
+            0.7
+          ],
+          "n": 10,
+          "seeds": 3
+        },
+        "6": {
+          "task": "pick up the butter and place it in the basket",
+          "success_rate": 1.0,
+          "std": 0.0,
+          "per_seed": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "n": 10,
+          "seeds": 3
+        },
+        "7": {
+          "task": "pick up the milk and place it in the basket",
+          "success_rate": 0.7666666666666666,
+          "std": 0.04714045207910321,
+          "per_seed": [
+            0.8,
+            0.8,
+            0.7
+          ],
+          "n": 10,
+          "seeds": 3
+        },
+        "8": {
+          "task": "pick up the chocolate pudding and place it in the basket",
+          "success_rate": 1.0,
+          "std": 0.0,
+          "per_seed": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "n": 10,
+          "seeds": 3
+        },
+        "9": {
+          "task": "pick up the orange juice and place it in the basket",
+          "success_rate": 0.8666666666666667,
+          "std": 0.04714045207910316,
+          "per_seed": [
+            0.8,
+            0.9,
+            0.9
+          ],
+          "n": 10,
+          "seeds": 3
+        }
+      },
+      "average": 0.8533333333333333,
+      "average_std": 0.05284964425559317
+    }
+  },
+  "_summary": {
+    "act": {
+      "LIBERO-OBJECT_avg": 0.8533333333333333,
+      "LIBERO-OBJECT-V_avg": null
+    }
+  }
+}

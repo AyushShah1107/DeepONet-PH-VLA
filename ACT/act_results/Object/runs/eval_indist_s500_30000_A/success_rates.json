@@ -1,0 +1,87 @@
+{
+  "_config": {
+    "libero_object": {
+      "replan": 5,
+      "indist_episodes": 10,
+      "test_seeds": 3,
+      "max_steps": 500,
+      "models": {
+        "act": "/home/user/Desktop/Ayush PH test/ACT/act_results/Object/runs/act/checkpoints/30000"
+      }
+    }
+  },
+  "LIBERO-OBJECT": {
+    "act": {
+      "per_task": {
+        "0": {
+          "task": "pick up the alphabet soup and place it in the basket",
+          "success_rate": 0.6666666666666666,
+          "std": 0.16996731711975951,
+          "per_seed": [
+            0.5,
+            0.6,
+            0.9
+          ],
+          "n": 10,
+          "seeds": 3
+        },
+        "1": {
+          "task": "pick up the cream cheese and place it in the basket",
+          "success_rate": 0.7666666666666666,
+          "std": 0.047140452079103216,
+          "per_seed": [
+            0.7,
+            0.8,
+            0.8
+          ],
+          "n": 10,
+          "seeds": 3
+        },
+        "2": {
+          "task": "pick up the salad dressing and place it in the basket",
+          "success_rate": 0.7999999999999999,
+          "std": 0.08164965809277262,
+          "per_seed": [
+            0.7,
+            0.8,
+            0.9
+          ],
+          "n": 10,
+          "seeds": 3
+        },
+        "3": {
+          "task": "pick up the bbq sauce and place it in the basket",
+          "success_rate": 0.16666666666666666,
+          "std": 0.047140452079103175,
+          "per_seed": [
+            0.2,
+            0.2,
+            0.1
+          ],
+          "n": 10,
+          "seeds": 3
+        },
+        "4": {
+          "task": "pick up the ketchup and place it in the basket",
+          "success_rate": 0.9,
+          "std": 0.08164965809277258,
+          "per_seed": [
+            0.9,
+            1.0,
+            0.8
+          ],
+          "n": 10,
+          "seeds": 3
+        }
+      },
+      "average": 0.6599999999999999,
+      "average_std": 0.08550950749270222
+    }
+  },
+  "_summary": {
+    "act": {
+      "LIBERO-OBJECT_avg": 0.6599999999999999,
+      "LIBERO-OBJECT-V_avg": null
+    }
+  }
+}

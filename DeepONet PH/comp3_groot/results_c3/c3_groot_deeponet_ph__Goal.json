@@ -1,0 +1,7 @@
+{
+  "comparison": "c3",
+  "variant": "c3_groot_deeponet_ph",
+  "suite": "Goal",
+  "indist_avg": 0.975,
+  "plus_avg": 0.7321428571428571
+}

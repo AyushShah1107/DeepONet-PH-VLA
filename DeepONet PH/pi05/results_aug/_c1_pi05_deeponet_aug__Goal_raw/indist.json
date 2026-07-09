@@ -1,0 +1,59 @@
+{
+  "libero_goal_indist": {
+    "c1_pi05_deeponet_aug": {
+      "per_task": {
+        "0": {
+          "task": "open the middle drawer of the cabinet",
+          "success_rate": 1.0,
+          "n": 12
+        },
+        "1": {
+          "task": "put the bowl on the stove",
+          "success_rate": 1.0,
+          "n": 12
+        },
+        "2": {
+          "task": "put the wine bottle on top of the cabinet",
+          "success_rate": 1.0,
+          "n": 12
+        },
+        "3": {
+          "task": "open the top drawer and put the bowl inside",
+          "success_rate": 0.9166666666666666,
+          "n": 12
+        },
+        "4": {
+          "task": "put the bowl on top of the cabinet",
+          "success_rate": 0.9166666666666666,
+          "n": 12
+        },
+        "5": {
+          "task": "push the plate to the front of the stove",
+          "success_rate": 1.0,
+          "n": 12
+        },
+        "6": {
+          "task": "put the cream cheese in the bowl",
+          "success_rate": 1.0,
+          "n": 12
+        },
+        "7": {
+          "task": "turn on the stove",
+          "success_rate": 1.0,
+          "n": 12
+        },
+        "8": {
+          "task": "put the bowl on the plate",
+          "success_rate": 1.0,
+          "n": 12
+        },
+        "9": {
+          "task": "put the wine bottle on the rack",
+          "success_rate": 0.9166666666666666,
+          "n": 12
+        }
+      },
+      "average": 0.9749999999999999
+    }
+  }
+}

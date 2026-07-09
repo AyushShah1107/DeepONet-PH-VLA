@@ -1,0 +1,51 @@
+{
+  "_config": {
+    "suite": "libero_10",
+    "replan": 5,
+    "n_per_cat": 12,
+    "max_steps": 520,
+    "seed": 42,
+    "env": "lerobot_LiberoEnv_relative",
+    "categories": [
+      "Camera Viewpoints",
+      "Light Conditions",
+      "Sensor Noise",
+      "Background Textures",
+      "Objects Layout",
+      "Robot Initial States",
+      "Language Instructions"
+    ]
+  },
+  "act": {
+    "Camera Viewpoints": {
+      "per_task": {
+        "711": {
+          "name": "LIVING_ROOM_SCENE2_put_both_the_cream_cheese_box_and_the_butter_in_the_basket_view_17_0_100_0_0_initstate_0",
+          "difficulty": 1,
+          "success": false
+        },
+        "979": {
+          "name": "LIVING_ROOM_SCENE1_put_both_the_alphabet_soup_and_the_cream_cheese_box_in_the_basket_view_0_0_100_354_2_initstate_0",
+          "difficulty": 2,
+          "success": false
+        },
+        "945": {
+          "name": "LIVING_ROOM_SCENE6_put_the_white_mug_on_the_plate_and_put_the_chocolate_pudding_to_the_right_of_the_plate_view_303_0_100_0_0_initstate_0",
+          "difficulty": 3,
+          "success": false
+        },
+        "1090": {
+          "name": "KITCHEN_SCENE6_put_the_yellow_and_white_mug_in_the_microwave_and_close_it_view_350_15_100_0_0_initstate_0",
+          "difficulty": 4,
+          "success": false
+        },
+        "914": {
+          "name": "STUDY_SCENE1_pick_up_the_book_and_place_it_in_the_back_compartment_of_the_caddy_view_295_0_100_0_0_initstate_0",
+          "difficulty": 5,
+          "success": false
+        }
+      },
+      "average": 0.0
+    }
+  }
+}

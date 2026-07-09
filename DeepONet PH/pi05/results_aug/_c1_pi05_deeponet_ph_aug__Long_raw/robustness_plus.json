@@ -1,0 +1,12 @@
+{
+  "per_category": {
+    "Camera Viewpoints": 0.0,
+    "Light Conditions": 0.5,
+    "Sensor Noise": 0.0,
+    "Background Textures": 0.125,
+    "Objects Layout": 0.25,
+    "Robot Initial States": 0.125,
+    "Language Instructions": 0.125
+  },
+  "robustness_average": 0.16071428571428573
+}

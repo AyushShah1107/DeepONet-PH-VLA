@@ -104,62 +104,73 @@ honest headline is the **fixed-budget table above (flow wins in-dist)**. The ope
 ## Scaling to larger flow VLAs — pi0.5 (comp‑1) and GR00T N1.6‑3B (comp‑2)
 
 The operator head won robustness on **SmolVLA (450 M, +20.6 pp, 5‑seed, p<0.001)** and **ACT**. Does it
-transfer to much larger flow‑matching VLAs? We ran it head‑only (frozen backbone) on **pi0.5 (3.3 B,
-PaliGemma+flow)** and are running it on **GR00T N1.6‑3B (Eagle+diffusion)**. Code: [`DeepONet PH/pi05/`](DeepONet%20PH/pi05/),
-[`DeepONet PH/comp3_groot/`](DeepONet%20PH/comp3_groot/).
+transfer to much larger flow‑matching / diffusion VLAs? We ran it head‑only on **pi0.5 (3.3 B,
+PaliGemma+flow, frozen backbone)** and **GR00T N1.6‑3B (Eagle+diffusion, partly frozen)** — both now complete.
+Code: [`DeepONet PH/pi05/`](DeepONet%20PH/pi05/), [`DeepONet PH/comp3_groot/`](DeepONet%20PH/comp3_groot/).
 
-### pi0.5 (comp‑1) — COMPLETE, closed‑loop replan=5, single seed (`DeepONet PH/pi05/results_replan5/`)
+### pi0.5 (comp‑1) — canonical: **photometric‑augmentation** run, replan=5, single seed (`DeepONet PH/pi05/results_aug/`)
+
+Final pi0.5 result: every head trained with identical per‑sample color‑jitter (`--color_jitter`, training‑only) —
+the standard way to buy robustness on a **frozen** backbone. All three variants complete, 4/4 suites.
 
 | Suite | Flow in‑dist / **Plus** | DeepONet in‑dist / **Plus** | +PH in‑dist / **Plus** |
 |---|---|---|---|
-| Spatial | 88.3 / **64.3** | 86.7 / 39.3 | 90.0 / 48.2 |
-| Object | 87.5 / **55.4** | 81.7 / 30.4 | 83.3 / 32.1 |
-| Long | 66.7 / **50.0** | 60.8 / 12.5 | 44.2 / 12.5 |
-| Goal | 93.3 / **50.0** | 96.7 / 35.7 | 87.5 / 50.0 |
-| **Average** | **84.0 / 54.9** | 81.5 / 29.5 | 76.3 / 35.7 |
+| Spatial | 87.5 / **71.4** | 92.5 / 44.6 | 90.8 / 35.7 |
+| Object | 88.3 / **57.1** | 92.5 / 55.4 | 85.8 / 53.6 |
+| Long | 70.0 / **46.4** | 53.3 / 26.8 | 44.2 / 16.1 |
+| Goal | 90.8 / **55.4** | 97.5 / 50.0 | 93.3 / 41.1 |
+| **Average** | **84.2 / 57.6** | **84.0 / 44.2** | 78.5 / 36.6 |
 
-**Honest result: on pi0.5, flow leads both in‑dist (+2.5 pp) and robustness (+25.4 pp) — the SmolVLA/ACT
-robustness win did NOT transfer.** This is a real negative result, not an artifact (the eval was audited:
-closed‑loop replan=5, correct action space / physics‑settle, symmetric flow‑vs‑DeepONet init, matched aggregation).
+**Honest result (aug): the factorized head *ties* flow in‑distribution (84.0 vs 84.2) but flow still leads
+robustness (+13.4 pp: 57.6 vs 44.2); the shape regularizer (+PH) makes it *worse* (−21.0: 36.6), not better.**
+Augmentation lifts both heads (flow Plus 54.9 → 57.6; DeepONet 29.5 → 44.2) and **halves** the gap (−25.4 → −13.4 pp)
+but does **not flip its sign** — the SmolVLA/ACT robustness win still does not transfer to a frozen pi0.5 backbone,
+and +PH (which *helps* on the adapting backbones) actively hurts here. Real negative result, audited (closed‑loop
+replan=5, correct action space / physics‑settle, symmetric flow‑vs‑DeepONet init, matched aggregation, single seed).
 
 **Likely cause — backbone co‑adaptation.** In *both* winning cases the representation was free to adapt to the
 operator head (ACT trains the encoder end‑to‑end from scratch; SmolVLA unfroze the backbone in stage 2 at lr 1e‑5).
 On pi0.5 the backbone is **frozen and head‑only**, and was pretrained end‑to‑end *as a flow model* — so its
-features are native to flow and foreign to a bolted‑on operator head. The signature fits: **in‑dist nearly ties**
-(the readout still fits) while **Plus collapses** (OOD robustness lives in the representation the head can't reshape).
-The apples‑to‑apples test (unfreeze the pi0.5 backbone, matching the SmolVLA regime) is the decisive follow‑up.
+features are native to flow and foreign to a bolted‑on operator head; augmentation regularizes the readout but
+cannot let the head co‑adapt the backbone. The signature fits: **in‑dist ties** (the readout still fits) while
+**Plus trails** (OOD robustness lives in the representation the head can't reshape). The apples‑to‑apples test
+(unfreeze the pi0.5 backbone, matching the SmolVLA regime) is the decisive follow‑up.
 
-#### Provenance — the replan bug (before → after)
+#### Provenance — two earlier protocols (superseded, kept for the record)
 
-**The error.** The first pi0.5 run used the model config default `n_action_steps=50` — it executed all 50
-predicted actions **open‑loop** before re‑querying, instead of the **replan=5** receding‑horizon control the
-SmolVLA study uses. Near‑open‑loop control tanks closed‑loop LIBERO tasks, so every absolute score was
-artificially low (and a second audit caught an asymmetric `--init` where the flow baseline discarded its pretrain).
+The aug run is preceded by (1) **replan=5, no augmentation** (`results_replan5/`: flow 84.0 / **54.9**, DeepONet
+81.5 / 29.5, +PH 76.3 / 35.7 — gap +25.4 pp) and (2) the original **open‑loop `n_action_steps=50`** run
+(`results_openloop_superseded/`: flow 52.9 / 27.7 — artificially low). The replan bug (config default executed all
+50 predicted actions open‑loop instead of receding‑horizon replan=5, plus an asymmetric `--init` where the flow
+baseline discarded its pretrain) was fixed in `eval_pi05.py`; the campaign was re‑run at replan=5, then re‑run with
+augmentation. **The conclusion is invariant across all three protocols:** on a frozen pi0.5 backbone the flow
+baseline leads robustness (Plus average — 27.7 vs 16.1 open‑loop; 54.9 vs 29.5 replan=5; **57.6 vs 44.2 with aug**).
+Full write‑up + all three tables: [`DeepONet PH/pi05/README.md`](DeepONet%20PH/pi05/README.md).
 
-**The change.** `eval_pi05.py` now forces `n_action_steps = args.replan` (=5) and both heads resume the same
-pretrain; the whole campaign was re‑run → `results_replan5/` (the table above, canonical).
+### GR00T N1.6‑3B (comp‑2) — COMPLETE, single seed (`DeepONet PH/comp3_groot/results_c3/`)
 
-**Before — open‑loop (`n_action_steps=50`), superseded** (`DeepONet PH/pi05/results_openloop_superseded/`):
+Same head‑only protocol on GR00T (Eagle VLM + diffusion head, partly frozen: the projector and the 1.09 B DiT
+train while the Eagle VLM stays mostly frozen). The pipeline required aligning to GR00T's pinned deps
+(torch 2.7.1 + flash‑attn 2.8.0.post2) and 7 bring‑up fixes — see
+[`DeepONet PH/comp3_groot/README.md`](DeepONet%20PH/comp3_groot/README.md).
 
-| Suite | Flow in‑dist / **Plus** | DeepONet in‑dist / **Plus** | +PH in‑dist / **Plus** |
+| Suite | Diffusion in‑dist / **Plus** | DeepONet in‑dist / **Plus** | +PH in‑dist / **Plus** |
 |---|---|---|---|
-| Spatial | 53.3 / 33.9 | 63.3 / 19.6 | 70.0 / 16.1 |
-| Object | 58.3 / 28.6 | 41.7 / 7.1 | 47.5 / 8.9 |
-| Long | 28.3 / 14.3 | 30.8 / 5.4 | 30.8 / 7.1 |
-| Goal | 71.7 / 33.9 | 77.5 / 32.1 | 78.3 / 26.8 |
-| **Average** | **52.9 / 27.7** | **53.3 / 16.1** | **56.7 / 14.7** |
+| Spatial | 98.3 / **91.1** | 96.7 / 83.9 | 98.3 / 83.9 |
+| Object | 98.3 / 83.9 | 99.2 / 75.0 | 99.2 / **82.1** |
+| Long | 95.8 / **91.1** | 95.0 / 69.6 | 87.5 / 73.2 |
+| Goal | 99.2 / 83.9 | 96.7 / 75.0 | 97.5 / 73.2 |
+| **Average** | **97.9 / 87.5** | 96.9 / 75.9 | 95.6 / 78.1 |
 
-**What the fix changed — and didn't.** It roughly *doubled* every absolute score (Flow in‑dist 52.9 → 84.0),
-confirming the bug was crippling. But the **conclusion is unchanged**: flow beats DeepONet on robustness under
-**both** protocols (Plus average — Flow 27.7 vs DeepONet 16.1 open‑loop; 54.9 vs 29.5 at replan=5). The negative
-result is a property of the frozen head‑only regime, not an artifact of the replan bug. Full write‑up:
-[`DeepONet PH/pi05/README.md`](DeepONet%20PH/pi05/README.md).
-
-### GR00T N1.6‑3B (comp‑2) — RUNNING
-
-Same head‑only protocol on GR00T (Eagle VLM + diffusion head). The pipeline required aligning to GR00T's pinned
-deps (torch 2.7.1 + flash‑attn 2.8.0.post2) and 7 bring‑up fixes — see
-[`DeepONet PH/comp3_groot/README.md`](DeepONet%20PH/comp3_groot/README.md). Results will populate `results_c3/`.
+**Honest result: the operator head essentially *ties* in‑distribution (96.9 vs 97.9) at a ~100× smaller head
+(~11 M vs the 1.09 B DiT) but loses robustness (−11.6 pp: 75.9 vs 87.5); +PH partly recovers it (78.1, −9.4),
+mainly by lifting Object‑Plus 75.0→82.1.** This is the *middle* of the co‑adaptation trend: GR00T is only
+*partly* frozen, so its robustness loss (−11.6) is smaller than fully‑frozen pi0.5 (−13.4, aug) and far from
+adapting SmolVLA (+20.6). The 3 B diffusion baseline is inherently appearance‑robust (Spatial: Light/Sensor/
+Texture/Layout/Language all 100; Camera 62.5, Robot‑init 75.0 — an appearance‑robust, geometry‑fragile
+signature), so the head has little robustness headroom to add. Single seed; 8 ep/category × 7 = 56 Plus
+instances/suite. **No GR00T checkpoints are retained** (the 3 B per‑suite finetunes were pruned after each
+confirmed result; the raw per‑category results in `results_c3/` are the durable record).
 
 ### ACT — V2 transfer regime (40‑task pretrain → per‑suite finetune) — COMPLETE (`ACT/act_results_v2/`)
 

@@ -1,0 +1,71 @@
+{
+  "_config": {
+    "suite": "libero_object",
+    "replan": 5,
+    "n_per_cat": 12,
+    "max_steps": 300,
+    "seed": 42,
+    "env": "lerobot_LiberoEnv_relative",
+    "categories": [
+      "Camera Viewpoints",
+      "Light Conditions",
+      "Sensor Noise",
+      "Background Textures",
+      "Objects Layout",
+      "Robot Initial States",
+      "Language Instructions"
+    ]
+  },
+  "act": {
+    "Camera Viewpoints": {
+      "per_task": {
+        "989": {
+          "name": "pick_up_the_chocolate_pudding_and_place_it_in_the_basket_view_0_0_100_356_354_initstate_0",
+          "difficulty": 1,
+          "success": false
+        },
+        "672": {
+          "name": "pick_up_the_cream_cheese_and_place_it_in_the_basket_view_0_0_100_4_8_initstate_0",
+          "difficulty": 2,
+          "success": false
+        },
+        "1005": {
+          "name": "pick_up_the_chocolate_pudding_and_place_it_in_the_basket_view_337_15_100_0_0_initstate_0",
+          "difficulty": 3,
+          "success": false
+        },
+        "849": {
+          "name": "pick_up_the_tomato_sauce_and_place_it_in_the_basket_view_285_0_100_0_0_initstate_0",
+          "difficulty": 4,
+          "success": false
+        },
+        "964": {
+          "name": "pick_up_the_milk_and_place_it_in_the_basket_view_323_15_100_0_0_initstate_0",
+          "difficulty": 5,
+          "success": false
+        },
+        "661": {
+          "name": "pick_up_the_alphabet_soup_and_place_it_in_the_basket_view_9_15_100_0_0_initstate_0",
+          "difficulty": 1,
+          "success": false
+        },
+        "660": {
+          "name": "pick_up_the_alphabet_soup_and_place_it_in_the_basket_view_8_15_100_0_0_initstate_0",
+          "difficulty": 2,
+          "success": false
+        },
+        "695": {
+          "name": "pick_up_the_salad_dressing_and_place_it_in_the_basket_view_0_0_128_0_0_initstate_0",
+          "difficulty": 3,
+          "success": true
+        },
+        "1029": {
+          "name": "pick_up_the_orange_juice_and_place_it_in_the_basket_view_0_0_100_358_8_initstate_0",
+          "difficulty": 4,
+          "success": false
+        }
+      },
+      "average": 0.1111111111111111
+    }
+  }
+}

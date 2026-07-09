@@ -1,0 +1,87 @@
+{
+  "_config": {
+    "libero_goal": {
+      "replan": 5,
+      "indist_episodes": 10,
+      "test_seeds": 3,
+      "max_steps": 500,
+      "models": {
+        "act": "/home/user/Desktop/Ayush PH test/ACT/act_results/Goal/runs/act/checkpoints/10000"
+      }
+    }
+  },
+  "LIBERO-GOAL": {
+    "act": {
+      "per_task": {
+        "0": {
+          "task": "open the middle drawer of the cabinet",
+          "success_rate": 0.8000000000000002,
+          "std": 0.08164965809277264,
+          "per_seed": [
+            0.9,
+            0.7,
+            0.8
+          ],
+          "n": 10,
+          "seeds": 3
+        },
+        "1": {
+          "task": "put the bowl on the stove",
+          "success_rate": 1.0,
+          "std": 0.0,
+          "per_seed": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "n": 10,
+          "seeds": 3
+        },
+        "2": {
+          "task": "put the wine bottle on top of the cabinet",
+          "success_rate": 0.9666666666666667,
+          "std": 0.04714045207910316,
+          "per_seed": [
+            1.0,
+            0.9,
+            1.0
+          ],
+          "n": 10,
+          "seeds": 3
+        },
+        "3": {
+          "task": "open the top drawer and put the bowl inside",
+          "success_rate": 0.5,
+          "std": 0.1632993161855452,
+          "per_seed": [
+            0.7,
+            0.5,
+            0.3
+          ],
+          "n": 10,
+          "seeds": 3
+        },
+        "4": {
+          "task": "put the bowl on top of the cabinet",
+          "success_rate": 0.9666666666666667,
+          "std": 0.04714045207910316,
+          "per_seed": [
+            0.9,
+            1.0,
+            1.0
+          ],
+          "n": 10,
+          "seeds": 3
+        }
+      },
+      "average": 0.8466666666666667,
+      "average_std": 0.06784597568730483
+    }
+  },
+  "_summary": {
+    "act": {
+      "LIBERO-GOAL_avg": 0.8466666666666667,
+      "LIBERO-GOAL-V_avg": null
+    }
+  }
+}

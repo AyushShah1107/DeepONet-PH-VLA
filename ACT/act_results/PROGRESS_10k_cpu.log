@@ -1,0 +1,12 @@
+[07-08 10:44:45] ==== ACT 10K LIBERO-Plus (CPU osmesa, canonical) START conc=6  [free RAM 220G] ====
+[07-08 10:44:45] START Long/act (max_steps=520)
+[07-08 10:44:45] START Long/act_deeponet (max_steps=520)
+[07-08 10:44:45] START Long/act_deeponet_ph (max_steps=520)
+[07-08 10:44:45] START Object/act (max_steps=300)
+[07-08 10:44:45] START Object/act_deeponet (max_steps=300)
+[07-08 10:44:45] START Object/act_deeponet_ph (max_steps=300)
+[07-08 10:49:01] ==== ACT 10K LIBERO-Plus (CPU osmesa, canonical) START conc=6  [free RAM 220G] ====
+[07-08 10:49:01] START Long/act (max_steps=520)
+[07-08 10:49:01] START Object/act (max_steps=300)
+[07-08 10:49:01] START Spatial/act (max_steps=300)
+[07-08 10:49:01] START Goal/act (max_steps=300)

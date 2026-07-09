@@ -1,0 +1,87 @@
+{
+  "_config": {
+    "libero_10": {
+      "replan": 5,
+      "indist_episodes": 10,
+      "test_seeds": 3,
+      "max_steps": 500,
+      "models": {
+        "act": "/home/user/Desktop/Ayush PH test/ACT/act_results/Long/runs/act/checkpoints/10000"
+      }
+    }
+  },
+  "LIBERO-10": {
+    "act": {
+      "per_task": {
+        "0": {
+          "task": "put both the alphabet soup and the tomato sauce in the basket",
+          "success_rate": 0.43333333333333335,
+          "std": 0.09428090415820634,
+          "per_seed": [
+            0.5,
+            0.3,
+            0.5
+          ],
+          "n": 10,
+          "seeds": 3
+        },
+        "1": {
+          "task": "put both the cream cheese box and the butter in the basket",
+          "success_rate": 0.4666666666666666,
+          "std": 0.09428090415820632,
+          "per_seed": [
+            0.6,
+            0.4,
+            0.4
+          ],
+          "n": 10,
+          "seeds": 3
+        },
+        "2": {
+          "task": "turn on the stove and put the moka pot on it",
+          "success_rate": 0.7333333333333334,
+          "std": 0.04714045207910321,
+          "per_seed": [
+            0.7,
+            0.7,
+            0.8
+          ],
+          "n": 10,
+          "seeds": 3
+        },
+        "3": {
+          "task": "put the black bowl in the bottom drawer of the cabinet and close it",
+          "success_rate": 0.5333333333333333,
+          "std": 0.1699673171197595,
+          "per_seed": [
+            0.3,
+            0.6,
+            0.7
+          ],
+          "n": 10,
+          "seeds": 3
+        },
+        "4": {
+          "task": "put the white mug on the left plate and put the yellow and white mug on the right plate",
+          "success_rate": 0.3,
+          "std": 0.1414213562373095,
+          "per_seed": [
+            0.2,
+            0.2,
+            0.5
+          ],
+          "n": 10,
+          "seeds": 3
+        }
+      },
+      "average": 0.4933333333333333,
+      "average_std": 0.10941818675051698
+    }
+  },
+  "_summary": {
+    "act": {
+      "LIBERO-10_avg": 0.4933333333333333,
+      "LIBERO-10-V_avg": null
+    }
+  }
+}

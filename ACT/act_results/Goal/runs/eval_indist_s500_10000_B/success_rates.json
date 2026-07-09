@@ -1,0 +1,87 @@
+{
+  "_config": {
+    "libero_goal": {
+      "replan": 5,
+      "indist_episodes": 10,
+      "test_seeds": 3,
+      "max_steps": 500,
+      "models": {
+        "act": "/home/user/Desktop/Ayush PH test/ACT/act_results/Goal/runs/act/checkpoints/10000"
+      }
+    }
+  },
+  "LIBERO-GOAL": {
+    "act": {
+      "per_task": {
+        "5": {
+          "task": "push the plate to the front of the stove",
+          "success_rate": 0.9333333333333332,
+          "std": 0.04714045207910316,
+          "per_seed": [
+            0.9,
+            1.0,
+            0.9
+          ],
+          "n": 10,
+          "seeds": 3
+        },
+        "6": {
+          "task": "put the cream cheese in the bowl",
+          "success_rate": 0.5666666666666668,
+          "std": 0.04714045207910316,
+          "per_seed": [
+            0.5,
+            0.6,
+            0.6
+          ],
+          "n": 10,
+          "seeds": 3
+        },
+        "7": {
+          "task": "turn on the stove",
+          "success_rate": 0.9666666666666667,
+          "std": 0.04714045207910316,
+          "per_seed": [
+            0.9,
+            1.0,
+            1.0
+          ],
+          "n": 10,
+          "seeds": 3
+        },
+        "8": {
+          "task": "put the bowl on the plate",
+          "success_rate": 0.8666666666666667,
+          "std": 0.04714045207910316,
+          "per_seed": [
+            0.9,
+            0.9,
+            0.8
+          ],
+          "n": 10,
+          "seeds": 3
+        },
+        "9": {
+          "task": "put the wine bottle on the rack",
+          "success_rate": 0.8666666666666667,
+          "std": 0.12472191289246473,
+          "per_seed": [
+            1.0,
+            0.7,
+            0.9
+          ],
+          "n": 10,
+          "seeds": 3
+        }
+      },
+      "average": 0.8400000000000001,
+      "average_std": 0.06265674424177547
+    }
+  },
+  "_summary": {
+    "act": {
+      "LIBERO-GOAL_avg": 0.8400000000000001,
+      "LIBERO-GOAL-V_avg": null
+    }
+  }
+}

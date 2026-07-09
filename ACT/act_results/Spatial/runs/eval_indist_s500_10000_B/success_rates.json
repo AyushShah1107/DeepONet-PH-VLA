@@ -1,0 +1,87 @@
+{
+  "_config": {
+    "libero_spatial": {
+      "replan": 5,
+      "indist_episodes": 10,
+      "test_seeds": 3,
+      "max_steps": 500,
+      "models": {
+        "act": "/home/user/Desktop/Ayush PH test/ACT/act_results/Spatial/runs/act/checkpoints/10000"
+      }
+    }
+  },
+  "LIBERO-SPATIAL": {
+    "act": {
+      "per_task": {
+        "5": {
+          "task": "pick up the black bowl on the ramekin and place it on the plate",
+          "success_rate": 0.2333333333333333,
+          "std": 0.09428090415820634,
+          "per_seed": [
+            0.3,
+            0.3,
+            0.1
+          ],
+          "n": 10,
+          "seeds": 3
+        },
+        "6": {
+          "task": "pick up the black bowl next to the cookie box and place it on the plate",
+          "success_rate": 0.8333333333333334,
+          "std": 0.04714045207910316,
+          "per_seed": [
+            0.8,
+            0.8,
+            0.9
+          ],
+          "n": 10,
+          "seeds": 3
+        },
+        "7": {
+          "task": "pick up the black bowl on the stove and place it on the plate",
+          "success_rate": 0.7666666666666666,
+          "std": 0.09428090415820636,
+          "per_seed": [
+            0.9,
+            0.7,
+            0.7
+          ],
+          "n": 10,
+          "seeds": 3
+        },
+        "8": {
+          "task": "pick up the black bowl next to the plate and place it on the plate",
+          "success_rate": 0.7333333333333334,
+          "std": 0.09428090415820636,
+          "per_seed": [
+            0.8,
+            0.6,
+            0.8
+          ],
+          "n": 10,
+          "seeds": 3
+        },
+        "9": {
+          "task": "pick up the black bowl on the wooden cabinet and place it on the plate",
+          "success_rate": 0.7333333333333334,
+          "std": 0.09428090415820636,
+          "per_seed": [
+            0.6,
+            0.8,
+            0.8
+          ],
+          "n": 10,
+          "seeds": 3
+        }
+      },
+      "average": 0.6599999999999999,
+      "average_std": 0.08485281374238571
+    }
+  },
+  "_summary": {
+    "act": {
+      "LIBERO-SPATIAL_avg": 0.6599999999999999,
+      "LIBERO-SPATIAL-V_avg": null
+    }
+  }
+}

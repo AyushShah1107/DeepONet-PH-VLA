@@ -1,0 +1,87 @@
+{
+  "_config": {
+    "libero_goal": {
+      "replan": 5,
+      "indist_episodes": 10,
+      "test_seeds": 3,
+      "max_steps": 500,
+      "models": {
+        "act": "/home/user/Desktop/Ayush PH test/ACT/act_results/Goal/runs/act/checkpoints/30000"
+      }
+    }
+  },
+  "LIBERO-GOAL": {
+    "act": {
+      "per_task": {
+        "0": {
+          "task": "open the middle drawer of the cabinet",
+          "success_rate": 0.9,
+          "std": 0.08164965809277258,
+          "per_seed": [
+            0.9,
+            0.8,
+            1.0
+          ],
+          "n": 10,
+          "seeds": 3
+        },
+        "1": {
+          "task": "put the bowl on the stove",
+          "success_rate": 1.0,
+          "std": 0.0,
+          "per_seed": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "n": 10,
+          "seeds": 3
+        },
+        "2": {
+          "task": "put the wine bottle on top of the cabinet",
+          "success_rate": 0.8666666666666667,
+          "std": 0.09428090415820632,
+          "per_seed": [
+            1.0,
+            0.8,
+            0.8
+          ],
+          "n": 10,
+          "seeds": 3
+        },
+        "3": {
+          "task": "open the top drawer and put the bowl inside",
+          "success_rate": 0.6666666666666666,
+          "std": 0.04714045207910316,
+          "per_seed": [
+            0.7,
+            0.6,
+            0.7
+          ],
+          "n": 10,
+          "seeds": 3
+        },
+        "4": {
+          "task": "put the bowl on top of the cabinet",
+          "success_rate": 0.9,
+          "std": 0.08164965809277258,
+          "per_seed": [
+            0.8,
+            0.9,
+            1.0
+          ],
+          "n": 10,
+          "seeds": 3
+        }
+      },
+      "average": 0.8666666666666666,
+      "average_std": 0.060944134484570936
+    }
+  },
+  "_summary": {
+    "act": {
+      "LIBERO-GOAL_avg": 0.8666666666666666,
+      "LIBERO-GOAL-V_avg": null
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "comparison": "c3",
+  "variant": "c3_groot_deeponet_ph",
+  "suite": "Long",
+  "indist_avg": 0.875,
+  "plus_avg": 0.7321428571428571
+}

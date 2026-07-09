@@ -38,6 +38,39 @@ from modeling_pi05_deeponet import PI05DeepONetPolicy, PI05FlowPolicy  # noqa: E
 DEV = "cuda"
 
 
+class _AugPreprocessor:
+    """Wrap the pi0.5 preprocessor with per-sample photometric color-jitter on the
+    raw RGB image tensors (observation.images.*, CHW float in [0,1]) BEFORE the base
+    preprocessor normalizes them. TRAINING-ONLY: `save_pretrained` delegates to the
+    base processor, so the checkpoint (and therefore eval) uses the un-augmented
+    processor. Applied identically to every variant, so the flow-vs-DeepONet
+    comparison stays fair — this only hardens the shared appearance robustness."""
+
+    def __init__(self, base, brightness, contrast, saturation, hue):
+        self._base = base
+        from torchvision.transforms import v2 as _T
+        self._cj = _T.ColorJitter(brightness=brightness, contrast=contrast,
+                                  saturation=saturation, hue=hue)
+
+    def _jitter(self, v):
+        # v: (..., C, H, W) float in [0,1]; fresh jitter params per frame
+        c, h, w = v.shape[-3], v.shape[-2], v.shape[-1]
+        flat = v.reshape(-1, c, h, w)
+        out = torch.stack([self._cj(flat[i]) for i in range(flat.shape[0])], 0)
+        return out.reshape(v.shape).clamp_(0.0, 1.0)
+
+    def __call__(self, batch):
+        for k, v in list(batch.items()):
+            if "observation.images" in k and torch.is_tensor(v) and v.ndim >= 3 and v.shape[-3] == 3:
+                batch[k] = self._jitter(v)
+        return self._base(batch)
+
+    def __getattr__(self, name):        # delegate save_pretrained() / attrs to base
+        if name == "_base":
+            raise AttributeError(name)
+        return getattr(self._base, name)
+
+
 def build_policy(head, variant, base_ckpt, lambda_ph, ph_k, **dk):
     ph_enabled = (variant == "ph")
     if head == "flow":
@@ -97,6 +130,13 @@ def main():
     ap.add_argument("--ckpt_every", type=int, default=5000)
     ap.add_argument("--epoch_steps", type=int, default=200)
     ap.add_argument("--seed", type=int, default=0)
+    # photometric augmentation (color-jitter) — training-only, all variants identical
+    ap.add_argument("--color_jitter", action="store_true",
+                    help="enable per-sample color-jitter augmentation during training")
+    ap.add_argument("--cj_brightness", type=float, default=0.3)
+    ap.add_argument("--cj_contrast", type=float, default=0.4)
+    ap.add_argument("--cj_saturation", type=float, default=0.5)
+    ap.add_argument("--cj_hue", type=float, default=0.08)
     args = ap.parse_args()
 
     set_seed(args.seed)
@@ -131,6 +171,11 @@ def main():
         if policy.config.normalization_mapping.get(k) == NormalizationMode.QUANTILES:
             policy.config.normalization_mapping[k] = NormalizationMode.MEAN_STD
     preprocessor, _post = make_pi05_pre_post_processors(policy.config, dataset_stats=norm_stats)
+    if args.color_jitter:
+        preprocessor = _AugPreprocessor(preprocessor, args.cj_brightness, args.cj_contrast,
+                                        args.cj_saturation, args.cj_hue)
+        print(f"[pi05-train] color-jitter aug ON (b={args.cj_brightness} c={args.cj_contrast} "
+              f"s={args.cj_saturation} h={args.cj_hue}) — TRAIN only, eval uses base processor", flush=True)
     n_frames = getattr(dataset, "num_frames", len(dataset))
     print(f"[pi05-train] dataset frames={n_frames}", flush=True)
 

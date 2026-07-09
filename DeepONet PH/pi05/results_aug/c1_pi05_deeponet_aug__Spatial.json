@@ -1,0 +1,7 @@
+{
+  "comparison": "c1",
+  "variant": "c1_pi05_deeponet_aug",
+  "suite": "Spatial",
+  "indist_avg": 0.925,
+  "plus_avg": 0.44642857142857145
+}

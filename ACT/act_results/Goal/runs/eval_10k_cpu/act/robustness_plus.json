@@ -1,0 +1,46 @@
+{
+  "_config": {
+    "suite": "libero_goal",
+    "replan": 5,
+    "n_per_cat": 12,
+    "max_steps": 300,
+    "seed": 42,
+    "env": "lerobot_LiberoEnv_relative",
+    "categories": [
+      "Camera Viewpoints",
+      "Light Conditions",
+      "Sensor Noise",
+      "Background Textures",
+      "Objects Layout",
+      "Robot Initial States",
+      "Language Instructions"
+    ]
+  },
+  "act": {
+    "Camera Viewpoints": {
+      "per_task": {
+        "734": {
+          "name": "put_the_bowl_on_the_stove_view_25_15_100_0_0_initstate_0",
+          "difficulty": 1,
+          "success": false
+        },
+        "1007": {
+          "name": "turn_on_the_stove_view_320_15_100_0_0_initstate_0",
+          "difficulty": 2,
+          "success": true
+        },
+        "862": {
+          "name": "put_the_bowl_on_top_of_the_cabinet_view_66_0_100_0_0_initstate_0",
+          "difficulty": 3,
+          "success": true
+        },
+        "1029": {
+          "name": "put_the_bowl_on_the_plate_view_0_0_184_0_0_initstate_0",
+          "difficulty": 4,
+          "success": false
+        }
+      },
+      "average": 0.5
+    }
+  }
+}

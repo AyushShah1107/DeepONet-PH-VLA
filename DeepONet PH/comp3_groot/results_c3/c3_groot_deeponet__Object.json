@@ -1,0 +1,7 @@
+{
+  "comparison": "c3",
+  "variant": "c3_groot_deeponet",
+  "suite": "Object",
+  "indist_avg": 0.9916666666666666,
+  "plus_avg": 0.75
+}

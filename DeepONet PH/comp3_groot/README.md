@@ -8,6 +8,29 @@ per‑suite **finetune (15K)** → **in‑dist + LIBERO‑Plus** eval on Spatial
 Three variants: `c3_groot` (native diffusion head, baseline) · `c3_groot_deeponet` ·
 `c3_groot_deeponet_ph`.
 
+## Results — closed‑loop, single seed (`results_c3/`) — COMPLETE
+
+| Suite | Diffusion in‑dist / **Plus** | DeepONet in‑dist / **Plus** | +PH in‑dist / **Plus** |
+|---|---|---|---|
+| Spatial | 98.3 / **91.1** | 96.7 / 83.9 | 98.3 / 83.9 |
+| Object | 98.3 / 83.9 | 99.2 / 75.0 | 99.2 / **82.1** |
+| Long | 95.8 / **91.1** | 95.0 / 69.6 | 87.5 / 73.2 |
+| Goal | 99.2 / 83.9 | 96.7 / 75.0 | 97.5 / 73.2 |
+| **Average** | **97.9 / 87.5** | 96.9 / 75.9 | 95.6 / 78.1 |
+
+**Honest result: the operator head essentially *ties* in‑distribution (96.9 vs 97.9) at a ~100× smaller head
+(~11 M vs the 1.09 B DiT), but loses robustness (−11.6 pp: 75.9 vs 87.5).** `+PH` partly recovers it (78.1,
+−9.4 vs baseline), mainly by lifting Object‑Plus 75.0 → 82.1. GR00T is only *partly* frozen (projector + DiT
+train, Eagle VLM mostly frozen), so its robustness loss sits **between** adapting SmolVLA (+20.6) and fully‑frozen
+pi0.5 (−13.4 aug) — the middle point of the co‑adaptation trend. The 3 B diffusion baseline is inherently
+appearance‑robust (Spatial breakdown: Light/Sensor/Texture/Layout/Language 100; Camera 62.5, Robot‑init 75.0 —
+appearance‑robust, geometry‑fragile), leaving little robustness headroom. Single seed; 8 ep/category × 7 = 56
+LIBERO‑Plus instances/suite. Raw per‑category rates in `results_c3/_<variant>__<suite>_raw/robustness_plus.json`.
+
+**Checkpoints:** none retained — the 3 B per‑suite finetunes were pruned after each confirmed result (below), and
+no GR00T checkpoint was small enough to archive. The `results_c3/` JSONs are the durable record; re‑create via
+`download_ckpt.py` + `run_c3_groot.sh`.
+
 ## Files
 | File | What |
 |---|---|
@@ -47,6 +70,8 @@ The GR00T DeepONet pipeline had never been validated end‑to‑end. The self‑
 Only #3 was our own code; the rest were environment drift or torch‑2.6 behavior changes.
 
 ## Status
-Started 2026‑07‑05. Runs autonomously through all 3 variants; checkpoints are pruned after
-each suite's eval (data‑loss‑safe: prune only after a confirmed non‑null result JSON), so
-results land in `results_c3/` as `<variant>__<suite>.json`. Est. ~4 days on one GPU.
+Started 2026‑07‑05, **COMPLETE 2026‑07‑08** (all 3 variants × 4 suites). Ran autonomously;
+checkpoints were pruned after each suite's eval (data‑loss‑safe: prune only after a confirmed
+non‑null result JSON), so `results_c3/` holds `<variant>__<suite>.json` + `_<variant>__<suite>_raw/`
+(per‑category rates) as the durable record. Raw results also mirrored to HF
+`AyushShah1107/pi05-deeponet-libero` under `results_c3/`.
